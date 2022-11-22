@@ -1,14 +1,14 @@
 <template>
-  <HelloWorld/>
+  <pageLogin/>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import pageLogin from './components/Login.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    pageLogin
   }
 }
 </script>

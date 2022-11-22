@@ -10,9 +10,23 @@
           <div v-if="!registerActive" class="card login" v-bind:class="{ error: emptyFields}">
             <h1> Sing In</h1>
             <form class="form-group">
-              <input v-model="emailLogin" type="email" class="form-control" placeholder="Email" required>
-              <input v-model="passwordLogin" type="password" class="form-control" placeholder="Password" required>
-              <input type="submit" class="btn btn-primary" @click="doLogin">
+              <div class="row">
+                <div class="input-field col s10">
+                  <i class="material-icons prefix">person</i>
+                  <input v-model="emailLogin" id="icon_prefix" type="text" class="validate" required>
+                  <label for="icon_prefix">Email</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s10">
+                  <i class="material-icons prefix">lock</i>
+                  <input v-model="passwordLogin" id="password" type="password" class="validate" required>
+                  <label for="password">Password</label>
+                </div>
+              </div>
+              <button class="btn waves-effect waves-light" type="submit" name="action" @click="doLogin">Sign In
+                <i class="material-icons right">send</i>
+              </button>
               <p> Don't have an account? <a href="#" @click="registerActive = !registerActive, emptyFields = false">Sign up here</a></p>
               <p><a href="#">Forgot your password?</a></p>
             </form>
@@ -20,10 +34,30 @@
           <div v-else class="card register" v-bind:class="{ error: emptyFields}">
             <h1>Sign Up</h1>
             <form class="form-group">
-              <input type="email" v-model="emailReg" class="form-control" placeholder="Email" required>
-              <input type="password" v-model="passwordReg" class="form-control" placeholder="Password" required>
-              <input type="password" v-model="confirmReg" class="form-control" placeholder="Confirm Password" required>
-              <input type="submit" class="btn btn-primary" @click="doRegister">
+              <div class="row">
+                <div class="input-field col s10">
+                  <i class="material-icons prefix">person</i>
+                  <input v-model="emailReg" id="icon_prefix" type="text" class="validate" required>
+                  <label for="icon_prefix">Email</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s10">
+                  <i class="material-icons prefix">lock</i>
+                  <input v-model="passwordReg" id="password" type="password" class="validate" required>
+                  <label for="password">Password</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s10">
+                  <i class="material-icons prefix">security</i>
+                  <input v-model="confirmReg" id="password" type="password" class="validate" required>
+                  <label for="password">Confirm Password</label>
+                </div>
+              </div>
+              <button class="btn waves-effect waves-light" type="submit" name="action" @click="doRegister">Sign Up
+                <i class="material-icons right">send</i>
+              </button>
               <p>Already have an account? <a href="#" @click="registerActive = !registerActive, emptyFields = false">Sign in here</a></p>
             </form>
           </div>
@@ -35,8 +69,10 @@
 </template>
 
 <script>
+import M from 'materialize-css'
 export default {
-  name: 'HelloWorld',
+  
+  name: 'pageLogin',
   data(){
     return{
       registerActive: false,
@@ -55,7 +91,12 @@ export default {
         this.emptyFields = true
       }
       else{
-        alert('You arre now registered')
+        var payload = {
+          usuario: this.emailLogin,
+          clave: this.passwordLogin
+        }
+        console.log(payload)
+        alert('You are now registered')
       }
     },
     doRegister(){
@@ -66,6 +107,9 @@ export default {
         alert("You are now registered")
       }
     }
+  },
+  mounted(){
+    M.updateTextFields()
   }
 }
 </script>
